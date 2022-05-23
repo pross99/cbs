@@ -21,37 +21,33 @@ export const logout = () => {
 
 export const login =(email : string, password : string) => {
     const APIKEY = "AIzaSyAnEsawmbpAUL7D545OdchE1SdJ0fzB-Is"
-    const url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + APIKEY 
+    const url =  "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + APIKEY 
     // laver en const som jeg kalder i min fetch forneden
-    return async (dispatch: (arg0: { type: string; payload: any; }) => void) => {
+    return async (dispatch: any) => {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ 
+            body: JSON.stringify({ //javascript to json string
+                //key value pairs of data you want to send to server
+                // ...
                 email: email, 
                 password: password,
                 returnSecureToken: true
             })
         });
-
-        const data = await response.json(); // json to javascript
-        console.log(data);
         if (!response.ok) {
             //There was a problem..
+            console.log("WTF")
         } else {
+            const data: FirebaseSignupSuccess = await response.json(); // json to javascript
+            console.log(data)
             
-            const user = new User(data.email, '', '');
-             
-             
-            SecureStore.setItemAsync('idToken', data.idToken);
-            SecureStore.setItemAsync('user', JSON.stringify(user));
-
-
+            
  
  
-            dispatch({type: LOGIN, payload: { user, token: data.idToken } })
+            dispatch({type: LOGIN, payload: { email: data.email,  idToken: data.idToken, }})
         }
     };
  };

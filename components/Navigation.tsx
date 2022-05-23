@@ -11,12 +11,13 @@ import ProfileScreen from '../screens/ProfileScreen';
 import SignupScreen from '../screens/SignupScreen';
 import LoginScreen from '../screens/LoginScreen'
 import AddPostScreen from '../screens/AddPostScreen';
-import Screen1 from './../screens/Screen1';
+import Screen1 from '../screens/ChatScreen';
 import Screen2 from './../screens/Screen2';
 import Screen3 from './../screens/Screen3';
 import { StackParamList } from "./../typings/navigations";
-import {createStackNavigator} from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ChatScreen from '../screens/ChatScreen';
+import MessagesScreen from '../screens/MessagesScreen'
 
 
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -37,12 +38,43 @@ function ProfileStackNavigator() {
         <Stack.Navigator>
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+            <Stack.Screen name='Messages' component={MessagesScreen} />
+
+          
+            
         </Stack.Navigator>
     )
 }
 
 
+function HomeStackNavigator(){
+   
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name='AddPost' component={AddPostScreen} />
+        </Stack.Navigator>
+    )
 
+    }
+
+    function ChatStackNavigator(){
+   
+        return (
+            <Stack.Navigator>
+                <Stack.Screen name='Messages' component={MessagesScreen} />
+                <Stack.Screen name="Chat"
+                component={ChatScreen}
+                options={({route}) => ({
+                     title:route.params.UserName
+                })
+               
+            } />
+                
+            </Stack.Navigator>
+        )
+    
+        }
 
 export default function Navigation() {
     const user = useSelector((state: RootState) => state.user.loggedInUser)
@@ -60,11 +92,11 @@ export default function Navigation() {
             {user !== null ? (
                 // Show the app with all navigation
                 <Tab.Navigator screenOptions={{ headerShown: false }}>
-                    
 
-                    <Tab.Screen name="Home" component={HomeScreen} />
+
+                        <Tab.Screen name="Home" component={HomeStackNavigator} />
                     {/* <Tab.Screen name="Discover" component={DiscoverScreen} /> */}
-                    {/* <Tab.Screen name="Chat" component={ChatStackNavigator} /> */}
+                        <Tab.Screen name="Beskeder" component={ChatStackNavigator} /> 
                     <Tab.Screen name="Your Profile" component={ProfileStackNavigator} />
 
 

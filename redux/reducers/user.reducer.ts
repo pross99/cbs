@@ -24,10 +24,14 @@ const userReducer = (state: ReduxState = initialState, action: any) => {
             return { ...state, loggedInUser: action.payload.user, idToken: action.payload.idToken }
 
             case LOGIN:
+                     const user = new User(action.payload.email,)
+      
+      return {
+        ...state,
+        loggedInUser: user,
+        idToken: action.payload.idToken,
+      };
 
-                console.log("It worked!");
-
-            return { ...state, loggedInUser: action.payload.user, token: action.payload.token };
         
             default:
                return state;

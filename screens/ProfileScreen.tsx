@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { getItemAsync } from 'expo-secure-store';
 import React, { useContext } from 'react';
 import { Button, ScrollView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -14,7 +15,7 @@ type ScreenNavigationType = NativeStackNavigationProp<StackParamList, "Profile">
 const  ProfileScreen = () => {
 
   const dispatch = useDispatch();
-    const navigation = useNavigation();
+    const navigation = useNavigation<ScreenNavigationType>();
     
     return (
 
@@ -24,31 +25,31 @@ const  ProfileScreen = () => {
             style={styles.container}
             contentContainerStyle={{justifyContent:'center',alignItems:'center'}}
             showsVerticalScrollIndicator={false}>
-            <Image style={styles.userImg} source={require('../images/prof.jpg')} />
+            <Image style={styles.userImg} source={require('../images/prof-1.jpg')} />
 
-            <Text style={styles.userName}> Jenny Doe</Text>
+            <Text style={styles.userName}> Martin helsum</Text>
             <Text style={styles.aboutUser}> Business Major</Text>
             <View style={styles.userBtnWrapper}>
-              <TouchableOpacity style={styles.userBtn} onPress={() =>{}}>
-                <Text style={styles.userBtnTxt}>Message </Text>
+              <TouchableOpacity style={styles.userBtn} onPress={() =>navigation.navigate('Messages')}>
+                <Text style={styles.userBtnTxt}>Beskeder </Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.userBtn} onPress={() =>{}}>
-                <Text style={styles.userBtnTxt}>Follow </Text>
+                <Text style={styles.userBtnTxt}>Følg </Text>
               </TouchableOpacity>
               </View>
 
               <View style={styles.userInfoWrapper}>
                 <View style={styles.userInfoItem}>
                   <Text style={styles.userInfoTitle}>22</Text>
-                  <Text style={styles.userInfoSubTitle}>Posts</Text>
+                  <Text style={styles.userInfoSubTitle}>Opslag</Text>
                 </View>
                 <View style={styles.userInfoItem}>
                   <Text style={styles.userInfoTitle}>200</Text>
-                  <Text style={styles.userInfoSubTitle}>followers</Text>
+                  <Text style={styles.userInfoSubTitle}>Følgere</Text>
                 </View>
                 <View style={styles.userInfoItem}>
                   <Text style={styles.userInfoTitle}>50</Text>
-                  <Text style={styles.userInfoSubTitle}>following</Text>
+                  <Text style={styles.userInfoSubTitle}>Følger</Text>
                 </View>
               </View>
     

@@ -6,13 +6,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {Container} from '../styles/FeedStyles';
 import PostCard from '../components/PostCard'
 import { getItemAsync } from 'expo-secure-store';
-import { NavigationContainer } from '@react-navigation/native';
-
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackParamList } from '../typings/navigations';
+type ScreenNavigationType = NativeStackNavigationProp<StackParamList, "Home">;
 const Posts = [
     {
       id: '1',
       userName: 'Karen sørensen',
-      userImg: require('../images/prof.jpg'),
+      userImg: require('../images/prof-1.jpg'),
       postTime: '4 minutter siden',
       post:
         'Søger studiegruppe.',
@@ -24,7 +26,7 @@ const Posts = [
     {
       id: '2',
       userName: 'John madsen',
-      userImg: require('../images/prof.jpg'),
+      userImg: require('../images/prof-2.jpg'),
       postTime: '2 timer siden',
       post:
         'Hey there, this is my test for a post of my social app in React Native.',
@@ -36,11 +38,11 @@ const Posts = [
     {
       id: '3',
       userName: 'Kent boye',
-      userImg: require('../images/prof.jpg'),
+      userImg: require('../images/prof-3.jpg'),
       postTime: '1 hours ago',
       post:
         'Hey there, this is my test for a post of my social app in React Native.',
-        postImg: require('../images/studiegruppe.jpg'),
+        postImg: require('../images/post-2.jpg'),
       liked: true,
       likes: '1',
       comments: '0',
@@ -48,11 +50,11 @@ const Posts = [
     {
       id: '4',
       userName: 'Paulina kronborg',
-      userImg: require('../images/prof.jpg'),
+      userImg: require('../images/prof-4.jpg'),
       postTime: '1 dag siden',
       post:
         'Hey there, this is my test for a post of my social app in React Native.',
-        postImg: require('../images/studiegruppe.jpg'),
+        postImg: require('../images/post-3.jpg'),
       liked: true,
       likes: '22',
       comments: '4',
@@ -60,7 +62,7 @@ const Posts = [
     {
       id: '5',
       userName: 'Alexander Chritiansen',
-      userImg: require('../images/prof.jpg'),
+      userImg: require('../images/prof-5.jpg'),
       postTime: '2 dage siden',
       post:
         'Hey there, this is my test for a post of my social app in React Native.',
@@ -71,8 +73,9 @@ const Posts = [
     },
   ];
 
-const HomeScreen = ({navigation}: {navigation: any}) => {
-  
+const HomeScreen = () => {
+   
+    const navigation = useNavigation<ScreenNavigationType>();
 //   const renderPost = ({item}: {item: any}) => (
 //       <PostCard {...item}/>
     //  );
@@ -86,10 +89,8 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
            showsVerticalScrollIndicator={false}
            />
 
-              
-                    
-                    <Icon name="add-outline" style={styles.button}
-                  onPress={() => navigation.navigate("AddPostScreen", {screen: "AddPostScreen"})}/>
+               <Icon name="add-outline" style={styles.button}
+                  onPress={() => navigation.navigate("AddPost")}/>
             
            </Container>
            
@@ -103,8 +104,8 @@ const styles = StyleSheet.create({
          alignItems: 'center',
           justifyContent: 'center', 
           position:'absolute',
-          top: 40,
-          right: 30,
+          top: 10,
+          right: 10,
           fontSize: 50
     },
 })

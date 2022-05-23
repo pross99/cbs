@@ -4,6 +4,13 @@ import * as SecureStore from "expo-secure-store";
 import { rehydrateUser, signup, login } from "../redux/actions/user.actions";
 
 import {StyleSheet, View, Text, TextInput, Button} from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { StackParamList } from "../typings/navigations";
+
+type ScreenNavigationType = NativeStackNavigationProp<
+  StackParamList,
+  "LoginScreen"
+>;
 
 
 export default function LoginScreen() {
@@ -40,7 +47,7 @@ async function readPersistedUserInfo() {
     <Text>Log in to your account </Text>
     <TextInput value={email} placeholder="email" onChangeText={setEmail} />
     <TextInput value={password} placeholder="password" onChangeText={setPassword} />
-    <Button title="Login" onPress={() => dispatch(login(email, password))} />
+    <Button title="Login" onPress={() => dispatch(handleLogin)} />
 </View>
   ); 
 }

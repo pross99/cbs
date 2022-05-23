@@ -24,7 +24,7 @@ const PostCard = ({item}: {item: any}) => {
     } else if (item.likes > 1) {
          var commentText = item.comments + 'komentarer'
     } else {
-        var commentText = '0 kommentar'
+        var commentText = '0'
     }
 
     return(
@@ -32,7 +32,7 @@ const PostCard = ({item}: {item: any}) => {
         <UserInfo>
             <UserImg source={item.userImg} />
             <UserInfoText>
-                <UserName> {item.UserName}</UserName>
+                <UserName> {item.userName}</UserName>
                 <PostTime> {item.postTime} </PostTime>
             </UserInfoText>
         </UserInfo>
@@ -44,7 +44,7 @@ const PostCard = ({item}: {item: any}) => {
                 <Icon name={likeIcon} size={25} color={likeIconColor} />
                 <InteractionText active={item.liked}>{likeText} </InteractionText> 
             </Interaction>
-            <Interaction active>
+            <Interaction>
                 <Icon name="chatbubble-outline" size={25} />
                 <InteractionText > {commentText} </InteractionText> 
             </Interaction>

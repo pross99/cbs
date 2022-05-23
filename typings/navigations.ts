@@ -6,4 +6,12 @@ export type StackParamList = {
     Profile: undefined;
     EditProfile: undefined;
     Login: undefined;
+    AddPost: undefined;
+    Home: undefined;
+    Chat: {UserName: string};
+    Messages: undefined;
+    userName: undefined;
+    ChatScreen2: undefined;
+    LoginScreen: undefined
+
 }

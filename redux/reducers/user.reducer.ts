@@ -15,22 +15,33 @@ const userReducer = (state: ReduxState = initialState, action: any) => {
     switch (action.type) {
         case LOGOUT:
             return { ...state, loggedInUser: null, idToken: undefined }
-        case REHYDRATE_USER:
-            return { ...state, loggedInUser: action.payload.user, idToken: action.payload.idToken }
         case SIGNUP:
-            // const user = new User(action.payload.email, '', '');
-            //state.loggedInUser = user; // MUTATION!!!!
-            console.log("new acc created")
-            return { ...state, loggedInUser: action.payload.user, idToken: action.payload.idToken }
+            const newUser = new User(action.payload.email, '', '');
+      // return {...state, loggedInUser: user}
+
+      //const user = {email: 'fakjsdflh', photoUrl: 'afdds' } as User
+      return {
+        ...state,
+        loggedInUser: newUser,
+        idToken: action.payload.idToken,
+      };
 
             case LOGIN:
-                     const user = new User(action.payload.email,)
+                     const user = new User(action.payload.email,action.payload.displayName, action.payload.photoUrl)
       
       return {
         ...state,
         loggedInUser: user,
         idToken: action.payload.idToken,
       };
+
+      case REHYDRATE_USER:
+        console.log("display name updated", action.payload.user)
+        return {
+          ...state,
+          loggedInUser: action.payload.user,
+          idToken: action.payload.idToken,
+        };
 
         
             default:

@@ -36,6 +36,9 @@ const  ProfileScreen = () => {
               <TouchableOpacity style={styles.userBtn} onPress={() =>{}}>
                 <Text style={styles.userBtnTxt}>Følg </Text>
               </TouchableOpacity>
+              <TouchableOpacity style={styles.userBtn} onPress={() =>navigation.navigate('EditProfile')}>
+                <Text style={styles.userBtnTxt}> Opdater profil </Text>
+              </TouchableOpacity>
               </View>
 
               <View style={styles.userInfoWrapper}>

@@ -29,6 +29,20 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
         // justifyContent: 'center',
     },
+    textTitle: {
+        position: "absolute", 
+        top: 1,
+        marginLeft: 5,
+        fontWeight: "bold",
+    },
+    inputStyle: {
+        marginLeft: 5,
+        fontFamily: "serif",
+        position: "absolute",
+        bottom: 20,
+        fontSize: 20,
+        
+    }
 })
 
 export default Input;

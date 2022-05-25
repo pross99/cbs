@@ -8,8 +8,35 @@ export const REHYDRATE_USER = 'REHYDRATE_USER';
 export const LOGOUT = 'LOGOUT';
 export const LOGIN = "LOGIN"
 
+
 export const rehydrateUser = (user: User, idToken: string) => {
-    return { type: REHYDRATE_USER, payload: { user, idToken } }
+    const APIKEY = "AIzaSyAnEsawmbpAUL7D545OdchE1SdJ0fzB-Is"
+    const url = "https://identitytoolkit.googleapis.com/v1/accounts:update?key=" + APIKEY
+     return async (dispatch: any) => {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ //javascript to json string
+                //key value pairs of data you want to send to server
+                // ...
+                idToken: idToken,
+                email: user.email,
+                displayName: user.displayName,
+                photoUrl: user.photoUrl,
+                returnSecureToken: true 
+            })
+        });
+        if (!response.ok) {
+            //There was a problem..
+            console.log("Something went wrong in updating the displayName")
+        } else {
+            const data = await response.json(); // json to javascript
+            // SecureStore.setItemAsync("displayName", data.displayName);
+    dispatch({ type: REHYDRATE_USER, payload: { user, idToken }})
+      } 
+  };
 }
 
 export const logout = () => {
@@ -47,7 +74,7 @@ export const login =(email : string, password : string) => {
             
  
  
-            dispatch({type: LOGIN, payload: { email: data.email,  idToken: data.idToken, }})
+            dispatch({type: LOGIN, payload: { email: data.email, displayName: data.displayName, idToken: data.idToken, photoUrl: data.profilePicture}})
         }
     };
  };
@@ -88,3 +115,5 @@ export const signup = (email : string, password : string) => {
        }
    };
 };
+
+

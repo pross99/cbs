@@ -1,45 +1,118 @@
-import React, { useState } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { useSelector } from 'react-redux';
-import { RootState } from '../App';
-import Input from '../components/Input';
-import { User } from '../entities/User';
+import React, { useState } from "react";
+import { Dimensions, KeyboardAvoidingView, Pressable,SafeAreaView,StyleSheet,Text, View,Image} from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import Input from "../components/Input";
+import Upload from "../components/Upload";
+import { User } from "../entities/User";
+import { rehydrateUser } from "../redux/actions/user.actions";
 
 export default function EditProfileScreen() {
-    const user: User = useSelector((state: RootState) => state.user.loggedInUser);
-    const [textEmail, setTextEmail] = useState(user.email)
-    // console.log(user.email);
+  const user = useSelector((state: any) => state.user.loggedInUser);
+  const token = useSelector((state: any) => state.user.idToken);
+  const dispatch = useDispatch(); // hook to get
+  const [name, setName] = React.useState(user.displayName);
+  const [photoUrl, setphotoUrl] = React.useState(user.photoUrl)
+  // const [photoUrl, setphotoUrl] = useState(user.photoUrl)
 
-    const onSave = () => {
-        if (textEmail !== ''  /* && other inputs are not empty */) {
-            // save the data to the server
-        } else {
-            //Show error message
-        }
+
+
+
+  const onSave = () => {
+    if (name !== "" && photoUrl !== "") {
+      const newUser: User = new User(user.email, name, photoUrl)
+      dispatch(rehydrateUser(newUser, token))
+    } else {
+      alert("Username or Picture")
     }
+  }
 
-    return (
+  if (user.photoUrl === "") {
+    user.photoUrl = "https://picsum.photos/id/237/200/300"
+  }
+  return (
+    <KeyboardAvoidingView style={{ flex: 1 }}
+      behavior={'padding'}
+      keyboardVerticalOffset={65}>
+      <SafeAreaView style={styles.safeArea}>
+        
+        <Upload />
+      <Image source={{ uri: user.photoUrl }} style={styles.imageStyle} />
+      
         <View style={styles.container}>
-            <Text>Edit Profile Screen</Text>
-            <Input title="What is your email?"
-                inputValue={textEmail}
-                setText={setTextEmail}
-                error="Email cannot be empty"
-            />
-            {/* <Input title="Study programme"
-                inputValue=""
-                error="Study programme cannot be empty" /> */}
 
-            <Button title="Save" onPress={() => console.log("hi")} />
+          <Input title="Full name"
+            inputValue={name}
+            setText={setName}
+            error={"Cannot be empty"}
+          />
+
+          <Input title="Photo url"
+            inputValue={photoUrl}
+            setText={setphotoUrl}
+            error={"Cannot be empty"}
+          />
+          
+
+          <Pressable
+            style={styles.saveButton}
+            onPress={() => {
+              dispatch(onSave)
+
+            }}
+          >
+            <Text style={styles.saveText}>Gem ændringer</Text>
+          </Pressable>
         </View>
-    );
+      </SafeAreaView>
+    </KeyboardAvoidingView>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-})
+  container: {
+    flex: 0.5,
+    backgroundColor: "#F0F0F0",
+    alignItems: "center",
+    justifyContent: "space-between",
+    margin: 20,
+    position:"absolute",
+    top: 150
+
+  },
+  safeArea: {
+    flex: 1,
+    alignItems: "center",
+  },
+  textInput: {
+    fontSize: 16,
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  saveButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 120,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: "#003399",
+  },
+  saveText: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: "bold",
+    letterSpacing: 0.25,
+    color: "white",
+  },
+  imageStyle:{
+    height: 140, 
+    width: 140,
+    position: "absolute",
+    top:20,
+    right: Dimensions.get("window").width - 350,
+    borderRadius: 80
+
+  },
+});

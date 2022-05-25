@@ -84,26 +84,31 @@ export default function UploadScreen(probs: any) {
   };
 
   return (
-    <View style={styles.uploadImageButton}>
+    <View style={styles.userBtn}>
       <TouchableHighlight onPress={pickImage}>
-        <Text style={styles.textStyle}>Upload image</Text>
+        <Text style={styles.textStyle}>Vælg billede</Text>
       </TouchableHighlight>
     </View> 
   );
 }
 const styles = StyleSheet.create({
-    uploadImageButton: {
+    userBtn: {
         position:"absolute",
-        right: Dimensions.get("window").width-160,
-        bottom: Dimensions.get("window").height-290,
-        backgroundColor: 'blue', 
+        right: Dimensions.get("window").width-310,
+        bottom: Dimensions.get("window").height-220,
+        backgroundColor: '#2e64e5', 
         alignItems: 'center', 
         justifyContent: 'center',
         width: 100,
         height: 30,
-        borderRadius: 15
+        borderRadius: 3,
+        borderWidth: 2,
+    
+        marginHorizontal: 50,
     },
     textStyle:{
         color: "white",
-    }
+    },
+
+  
 });

@@ -18,6 +18,7 @@ import { StackParamList } from "./../typings/navigations";
 import Icon from 'react-native-vector-icons/Ionicons';
 import ChatScreen from '../screens/ChatScreen';
 import MessagesScreen from '../screens/MessagesScreen'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -94,10 +95,56 @@ export default function Navigation() {
                 <Tab.Navigator screenOptions={{ headerShown: false }}>
 
 
-                        <Tab.Screen name="Home" component={HomeStackNavigator} />
+                        <Tab.Screen
+                         name="Hjæm"
+                          component={HomeStackNavigator}
+                          options={({route}) => ({
+                            tabBarLabel: 'Hjæm',
+                            // tabBarVisible: route.state && route.state.index === 0,
+                            tabBarIcon: ({color, size}) => (
+                              <MaterialCommunityIcons
+                                name="home-outline"
+                                color={color}
+                                size={size}
+                          />
+                            ),
+                          })}
+                          />
                     {/* <Tab.Screen name="Discover" component={DiscoverScreen} /> */}
-                        <Tab.Screen name="Beskeder" component={ChatStackNavigator} /> 
-                    <Tab.Screen name="Your Profile" component={ProfileStackNavigator} />
+                        <Tab.Screen
+                         name="Beskeder"
+                          component={ChatStackNavigator}
+                          options={({route}) => ({
+                            tabBarLabel: 'Beskeder',
+                            // tabBarVisible: route.state && route.state.index === 0,
+                            tabBarIcon: ({color, size}) => (
+                              <MaterialCommunityIcons
+                                name="chat-outline"
+                                color={color}
+                                size={size}
+                          />
+                            ),
+                          })}
+                           
+                           
+                           /> 
+                    <Tab.Screen
+                     name="Profil"
+                      component={ProfileStackNavigator}
+                      options={({route}) => ({
+                        tabBarLabel: 'Profil',
+                        // tabBarVisible: route.state && route.state.index === 0,
+                        tabBarIcon: ({color, size}) => (
+                          <MaterialCommunityIcons
+                            name="account-outline"
+                            color={color}
+                            size={size}
+                      />
+                        ),
+                      })}
+                      
+                      
+                      />
 
 
                   

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dimensions, KeyboardAvoidingView, Pressable,SafeAreaView,StyleSheet,Text, View,Image} from "react-native";
+import { Dimensions, KeyboardAvoidingView, Pressable,SafeAreaView,StyleSheet,Text, View,Image, TouchableOpacity} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Input from "../components/Input";
 import Upload from "../components/Upload";
@@ -40,28 +40,23 @@ export default function EditProfileScreen() {
       
         <View style={styles.container}>
 
-          <Input title="Full name"
+             <Input  title="Ønsket navn"
             inputValue={name}
             setText={setName}
-            error={"Cannot be empty"}
-          />
+            error={"Cannot be empty"}/>
+      
+         
 
-          <Input title="Photo url"
+          <Input title="Addrese til ønsket billede..."
             inputValue={photoUrl}
             setText={setphotoUrl}
             error={"Cannot be empty"}
           />
-          
+          <TouchableOpacity style={styles.userBtn} onPress={() =>dispatch(onSave)}>
+                <Text style={styles.userBtnTxt}> Opdater profil </Text>
+              </TouchableOpacity>
 
-          <Pressable
-            style={styles.saveButton}
-            onPress={() => {
-              dispatch(onSave)
-
-            }}
-          >
-            <Text style={styles.saveText}>Gem ændringer</Text>
-          </Pressable>
+         
         </View>
       </SafeAreaView>
     </KeyboardAvoidingView>
@@ -76,7 +71,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     margin: 20,
     position:"absolute",
-    top: 150
+    top: 150,
+    
 
   },
   safeArea: {
@@ -88,16 +84,7 @@ const styles = StyleSheet.create({
     height: 40,
     margin: 12,
     borderWidth: 1,
-    padding: 10,
-  },
-  saveButton: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 120,
-    borderRadius: 4,
-    elevation: 3,
-    backgroundColor: "#003399",
+    padding: 0,
   },
   saveText: {
     fontSize: 16,
@@ -114,5 +101,16 @@ const styles = StyleSheet.create({
     right: Dimensions.get("window").width - 350,
     borderRadius: 80
 
+  },
+  userBtn: {
+    borderColor: '#2e64e5',
+    borderWidth: 2,
+    borderRadius: 3,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    marginHorizontal: 5,
+  },
+  userBtnTxt: {
+    color: '#2e64e5',
   },
 });

@@ -29,7 +29,7 @@ const Posts = [
       userImg: require('../images/prof-2.jpg'),
       postTime: '2 timer siden',
       post:
-        'Hey there, this is my test for a post of my social app in React Native.',
+        'Hvornår har vi sommerferie?.',
       postImg: 'none',
       liked: false,
       likes: '0',
@@ -41,7 +41,7 @@ const Posts = [
       userImg: require('../images/prof-3.jpg'),
       postTime: '1 hours ago',
       post:
-        'Hey there, this is my test for a post of my social app in React Native.',
+        'Søger billige brugte bøger :-).',
         postImg: require('../images/post-2.jpg'),
       liked: true,
       likes: '1',
@@ -53,7 +53,7 @@ const Posts = [
       userImg: require('../images/prof-4.jpg'),
       postTime: '1 dag siden',
       post:
-        'Hey there, this is my test for a post of my social app in React Native.',
+        'Vi mangler stadig et hold til årets største beer-pong tuneringen på fredag. I kan tilmelde jer via appen',
         postImg: require('../images/post-3.jpg'),
       liked: true,
       likes: '22',
@@ -84,7 +84,8 @@ const HomeScreen = () => {
         <Container>    
            <FlatList 
            data={Posts}
-           renderItem={({item}) => <PostCard item={item} />}
+           renderItem= {({item}) => <PostCard item={item} 
+           />}
            keyExtractor={item=>item.id}
            showsVerticalScrollIndicator={false}
            />

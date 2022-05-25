@@ -4,7 +4,7 @@ import { getItemAsync } from 'expo-secure-store';
 import React, { useContext } from 'react';
 import { Button, ScrollView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/actions/user.actions';
 import { StackParamList } from '../typings/navigations';
 
@@ -14,8 +14,18 @@ type ScreenNavigationType = NativeStackNavigationProp<StackParamList, "Profile">
 
 const  ProfileScreen = () => {
 
+  const user = useSelector((state: any) => state.user.loggedInUser); // skal hente en værdi fra min store
+
+
   const dispatch = useDispatch();
     const navigation = useNavigation<ScreenNavigationType>();
+
+    if (user.displayName === "" || user.displayName === undefined) {
+      user.displayName = "PedeManden";
+
+    }
+
+   
     
     return (
 
@@ -27,7 +37,7 @@ const  ProfileScreen = () => {
             showsVerticalScrollIndicator={false}>
             <Image style={styles.userImg} source={require('../images/prof-1.jpg')} />
 
-            <Text style={styles.userName}> Martin helsum</Text>
+            <Text style={styles.userName}> {user.displayName}</Text>
             <Text style={styles.aboutUser}> Business Major</Text>
             <View style={styles.userBtnWrapper}>
               <TouchableOpacity style={styles.userBtn} onPress={() =>navigation.navigate('Messages')}>
@@ -57,7 +67,7 @@ const  ProfileScreen = () => {
               </View>
     
         
-              <Button title="Logout" onPress={() => dispatch(logout())} /> 
+              <Button title="Log ud" onPress={() => dispatch(logout())}  /> 
 
             </ScrollView>
         </SafeAreaView>

@@ -1,10 +1,13 @@
+
 import React from "react"
 import  Icon  from 'react-native-vector-icons/Ionicons'
 import { Divider, Interaction, PostText, PostTime, UserImg, UserInfo, UserInfoText, UserName, InteractionWrapper, InteractionText, Card, PostImg } from "../styles/FeedStyles"
 
 
-const PostCard = ({item}: {item: any}) => {
 
+const PostCard = ({item}: {item: any}) => {
+   
+ 
     const likeIcon = item.liked ? 'happy' : 'happy-outline';
     const likeIconColor= item.liked ? '#e264e5' : '#333';
     
@@ -29,8 +32,8 @@ const PostCard = ({item}: {item: any}) => {
 
     return(
         <Card>
-        <UserInfo>
-            <UserImg source={item.userImg} />
+        <UserInfo >
+            <UserImg source={item.userImg}  />
             <UserInfoText>
                 <UserName> {item.userName}</UserName>
                 <PostTime> {item.postTime} </PostTime>

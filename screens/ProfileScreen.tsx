@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/actions/user.actions';
 import { StackParamList } from '../typings/navigations';
+import GetProfileImage from '../components/profileImage'
 
 
 type ScreenNavigationType = NativeStackNavigationProp<StackParamList, "Profile">;
@@ -25,7 +26,9 @@ const  ProfileScreen = () => {
 
     }
 
-   
+    if (typeof user.photoUrl == "undefined") {
+      user.photoUrl = "https://picsum.photos/id/237/200/300";
+    }
     
     return (
 
@@ -35,7 +38,9 @@ const  ProfileScreen = () => {
             style={styles.container}
             contentContainerStyle={{justifyContent:'center',alignItems:'center'}}
             showsVerticalScrollIndicator={false}>
-            <Image style={styles.userImg} source={require('../images/prof-1.jpg')} />
+            {/* <Image style={styles.userImg} source={require('../images/prof-1.jpg')} /> */}
+            {/* <GetProfileImage /> */}
+            <Image source={{ uri: user.photoUrl }} style={styles.userImg} />
 
             <Text style={styles.userName}> {user.displayName}</Text>
             <Text style={styles.aboutUser}> Business Major</Text>

@@ -7,9 +7,9 @@ import { Dimensions, Image, StyleSheet } from "react-native";
 initializeApp(firebase)
 
 
-export default function GetProfilePicture() {
+export default function GetProfileImage() {
   const user = useSelector((state: any) => state.user.loggedInUser);
-  const [url, setUrl] = useState();
+  const [url, setUrl] = useState<any | null>(null);
 
   useEffect(() => {
     const func = () => {

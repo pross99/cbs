@@ -65,7 +65,7 @@ const Posts = [
       userImg: require('../images/prof-5.jpg'),
       postTime: '2 dage siden',
       post:
-        'Hey there, this is my test for a post of my social app in React Native.',
+        'Hej. Det her er en test',
       postImg: 'none',
       liked: false,
       likes: '0',

@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     top:20,
     right: Dimensions.get("window").width - 350,
-    borderRadius: 80
+    borderRadius: 80,
+    opacity: 0.8
 
   },
   userBtn: {

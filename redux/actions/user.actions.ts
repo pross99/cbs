@@ -1,6 +1,7 @@
 import * as SecureStore from 'expo-secure-store';
 import { FirebaseSignupSuccess } from "../../entities/FirebaseSignupSuccess";
 import { User } from '../../entities/User';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
 export const SIGNUP = 'SIGNUP';

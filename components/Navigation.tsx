@@ -37,7 +37,16 @@ const Tab = createBottomTabNavigator();
 function ProfileStackNavigator() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen name="DinProfil" component={ProfileScreen}
+             options={{
+                headerTitleAlign:'center',
+                
+                headerTitleStyle: {
+                    color: '#2e64e5'
+
+                }
+            }}
+             />
             <Stack.Screen name="EditProfile" component={EditProfileScreen} />
             <Stack.Screen name='Messages' component={MessagesScreen} />
 
@@ -52,7 +61,16 @@ function HomeStackNavigator(){
    
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="CBS" component={HomeScreen} 
+            options={{
+                headerTitleAlign:'center',
+                
+                headerTitleStyle: {
+                    color: '#2e64e5'
+
+                }
+            }}
+            />
             <Stack.Screen name='AddPost' component={AddPostScreen} />
         </Stack.Navigator>
     )
@@ -63,9 +81,19 @@ function HomeStackNavigator(){
    
         return (
             <Stack.Navigator>
-                <Stack.Screen name='Messages' component={MessagesScreen} />
-                <Stack.Screen name="Chat"
-                component={ChatScreen}
+                <Stack.Screen name='Beskeder' component={MessagesScreen} 
+                options={{
+                    headerTitleAlign:'center',
+                    
+                    headerTitleStyle: {
+                        color: '#2e64e5'
+    
+                    }
+                }}
+                
+                
+                />
+                <Stack.Screen name="Chat" component={ChatScreen}
                 options={({route}) => ({
                      title:route.params.UserName
                 })

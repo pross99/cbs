@@ -12,6 +12,9 @@ export type StackParamList = {
     Messages: undefined;
     userName: undefined;
     ChatScreen2: undefined;
-    LoginScreen: undefined
+    LoginScreen: undefined;
+    CBS: undefined;
+    DinProfil: undefined;
+    Beskeder: undefined;
 
 }

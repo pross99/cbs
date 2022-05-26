@@ -8,7 +8,7 @@ import { Divider, Interaction, PostText, PostTime, UserImg, UserInfo, UserInfoTe
 const PostCard = ({item}: {item: any}) => {
    
  
-    const likeIcon = item.liked ? 'happy' : 'happy-outline';
+    const likeIcon = item.liked ? 'happy' : 'happy-outline'; // ternary operator - en slags if else
     const likeIconColor= item.liked ? '#e264e5' : '#333';
     
     

@@ -1,13 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { getItemAsync } from 'expo-secure-store';
 import React, { useContext } from 'react';
 import { Button, ScrollView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/actions/user.actions';
 import { StackParamList } from '../typings/navigations';
-import GetProfileImage from '../components/profileImage'
+
 
 
 type ScreenNavigationType = NativeStackNavigationProp<StackParamList, "Profile">;
@@ -16,9 +15,13 @@ type ScreenNavigationType = NativeStackNavigationProp<StackParamList, "Profile">
 const  ProfileScreen = () => {
 
   const user = useSelector((state: any) => state.user.loggedInUser); // skal hente en værdi fra min store
+  //Redux gør det nemt at vælge data whereever i applikationen unden brug af context eller prop drilling 
+  // Istedet kan man tage enhver værdi eller slice i min store med useselector hook 
 
 
   const dispatch = useDispatch();
+  // For at ændre applikationens data skal en action blive dispatched til store. Her bruger man dispatch hook - 
+  // som kan sende et action name og data payload på et normalt event såsom tryk på en knap
     const navigation = useNavigation<ScreenNavigationType>();
 
     if (user.displayName === "" || user.displayName === undefined) {
